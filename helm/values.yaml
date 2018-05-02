@@ -1,2 +1,3 @@
 tag: latest
+replicas: 4
 vhost: hello.opsnotice.xyz
