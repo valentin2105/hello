@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: hello
+  name: hello
+spec:
+  rules:
+  - host: {{ .Values.vhost }}
+    http:
+      paths:
+      - backend:
+          serviceName: hello
+          servicePort: 8888
+        path: /

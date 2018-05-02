@@ -1,22 +1,25 @@
-FROM golang
+FROM golang:1.10.1-stretch
 
-# Fetch dependencies
-RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+RUN go get -u github.com/golang/dep/cmd/dep \
+    && mkdir -p /go/src/github.com/valentin2105/Hello
 
-# Add project directory to Docker image.
-ADD . /go/src/github.com/valentin2105/Hello
-
-ENV USER valentin
-ENV HTTP_ADDR :8888
-ENV HTTP_DRAIN_INTERVAL 1s
-ENV COOKIE_SECRET uXlcW8PBsWz8tLnK
-
-# Replace this with actual PostgreSQL DSN.
-#ENV DSN postgres://valentin@localhost:5432/Hello?sslmode=disable
+ADD Gopkg.toml /go/src/github.com/valentin2105/Hello
+ADD Gopkg.lock /go/src/github.com/valentin2105/Hello
 
 WORKDIR /go/src/github.com/valentin2105/Hello
 
-RUN dep ensure && go build
-
+RUN dep ensure --vendor-only
+ 
+ADD . /go/src/github.com/valentin2105/Hello
+ 
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o Hello -v                                       
+FROM alpine:latest
+ 
+WORKDIR /root/
+ 
+COPY --from=0 /go/src/github.com/valentin2105/Hello/Hello .
+COPY --from=0 /go/src/github.com/valentin2105/Hello/templates/ templates/
+COPY --from=0 /go/src/github.com/valentin2105/Hello/static/ static/
+ 
 EXPOSE 8888
 CMD ./Hello
