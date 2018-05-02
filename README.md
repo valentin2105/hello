@@ -13,6 +13,6 @@ curl http://localhost
 
 ### deploy
 ```
-kubectl config use-context my-clusterf
+kubectl config use-context my-cluster
 make deploy
 ```
