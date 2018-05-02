@@ -19,5 +19,5 @@ run:
 deploy:
 	$(eval COMMIT := $(shell git rev-parse HEAD))
 	sed -i 's/tag: latest/tag: ${COMMIT}/g' helm/values.yaml
-	cd helm/values.yaml && helm upgrade hello .
+	cd helm/ && helm upgrade hello .
 	git checkout helm/values.yaml
