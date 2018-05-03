@@ -23,4 +23,4 @@ COPY --from=0 /go/src/github.com/valentin2105/Hello/templates/ templates/
 COPY --from=0 /go/src/github.com/valentin2105/Hello/static/ static/
  
 EXPOSE 8888
-CMD ./Hello
+CMD /root/Hello
