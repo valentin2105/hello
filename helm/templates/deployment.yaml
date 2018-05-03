@@ -20,10 +20,9 @@ spec:
       containers:
       - image: valentinnc/hello:{{ .Values.tag }}
         name: hello
+        command: ['/root/Hello']
         env: 
           - name: MY_POD_IP
             valueFrom:
               fieldRef:
                 fieldPath: status.podIP
-
-
