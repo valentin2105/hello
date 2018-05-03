@@ -13,7 +13,8 @@ build:
 
 run:
 	$(eval COMMIT := $(shell git rev-parse HEAD))
-	sudo docker run -d -p '80:8888' valentinnc/hello:${COMMIT}
+	go build
+	./Hello
 
 
 deploy:
