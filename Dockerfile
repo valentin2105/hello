@@ -13,7 +13,8 @@ RUN dep ensure --vendor-only
 ADD . /go/src/github.com/valentin2105/Hello
  
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o Hello -v                                       
-FROM alpine:latest
+#########################################################################
+FROM scratch
  
 WORKDIR /root/
  
