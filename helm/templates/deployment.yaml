@@ -18,7 +18,7 @@ spec:
         name: hello
     spec:
       containers:
-      - image: valentinnc/hello:{{ .Values.tag }}
+      - image: {{ .Values.image }}:{{ .Values.tag }}
         name: hello
         command: ['/root/Hello']
         env: 

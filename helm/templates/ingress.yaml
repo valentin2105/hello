@@ -13,5 +13,5 @@ spec:
       paths:
       - backend:
           serviceName: hello
-          servicePort: 8888
+          servicePort: {{ .Values.port }}
         path: /

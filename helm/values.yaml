@@ -1,3 +1,5 @@
+image: valentinnc/hello
 tag: latest
 replicas: 4
+port: 8888
 vhost: hello.opsnotice.xyz
