@@ -20,5 +20,5 @@ run:
 deploy:
 	$(eval COMMIT := $(shell git rev-parse HEAD))
 	sed -i 's/tag: latest/tag: ${COMMIT}/g' helm/values.yaml
-	cd helm/ && helm upgrade hello .
+	cd helm/ && helm --kube-context=${CLUSTER} upgrade hello .
 	git checkout helm/values.yaml
